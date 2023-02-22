@@ -46,13 +46,21 @@ jobs:
     needs: check_run
     steps:
       - uses: actions/checkout@v2
-      - uses: kelvintaywl/action-jsonresume-export@v1
+      - uses: thekumar/action-jsonresume-export@v1
         name: Export resume as HTML
         with:
           theme: macchiato
           resume_filepath: resume.json
-          # modifies the index.html in-place
-          output_filepath: docs/index.html
+          # modifies the resume.html in-place
+          output_filepath: resume.html
+      - uses: thekumar/action-jsonresume-export@v1
+        name: Export resume as PDF
+        with:
+          theme: macchiato
+          resume_filepath: resume.json
+          # modifies the resume.pdf in-place
+          output_filepath: resume.pdf
+          output_format: pdf
       - name: Commit published HTML
         id: commit
         run: |
